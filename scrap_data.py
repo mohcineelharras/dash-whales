@@ -10,7 +10,7 @@ url = "https://api.etherscan.io/api"
 api_key = "VVJFE7IG5WSK8P2UJIJN5MST5UBQEZYVYW"
 
 # Load the JSON file into a dictionary
-with open("dict_tokens_addr.json", "r") as file:
+with open("ressources/dict_tokens_addr.json", "r") as file:
     dict_addresses = json.load(file)
 
 def get_coin_data(tokenSymbol, contractAddr, n):
@@ -57,7 +57,7 @@ def get_coin_data(tokenSymbol, contractAddr, n):
         # Add a delay to avoid hitting the API rate limit
         time.sleep(1)
 
-    df_transactions['timeStamp'] = pd.to_datetime(df_transactions['timeStamp'], unit='s')
+    df_transactions['timeStamp'] = pd.to_datetime(df_transactions['timeStamp'])
     df_transactions['value'] = df_transactions['value'].astype(float) / 1e18
 
     # Save transactions to a CSV file
