@@ -2,12 +2,17 @@ import requests
 import time
 import pandas as pd
 import json
+import os
 
 # Etherscan API URL
 url = "https://api.etherscan.io/api"
 
 # Your Etherscan API Key
 api_key = "VVJFE7IG5WSK8P2UJIJN5MST5UBQEZYVYW"
+
+# Create output folder
+if not os.path.exists("output"):
+    os.makedirs("output")
 
 # Load the JSON file into a dictionary
 with open("ressources/dict_tokens_addr.json", "r") as file:
@@ -57,7 +62,7 @@ def get_coin_data(tokenSymbol, contractAddr, n):
         # Add a delay to avoid hitting the API rate limit
         time.sleep(1)
 
-    df_transactions['timeStamp'] = pd.to_datetime(df_transactions['timeStamp'])
+    df_transactions['timeStamp'] = pd.to_datetime(df_transactions['timeStamp'].astype(int), unit='s')
     df_transactions['value'] = df_transactions['value'].astype(float) / 1e18
 
     # Save transactions to a CSV file
