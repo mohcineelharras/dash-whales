@@ -41,3 +41,9 @@ python app.py
 
 This is the first version to get transaction data on etherscan, but its working kinda ok.
 There are few known bugs which i will fix as soon as possible.
+
+
+Pour lancer l'API
+```
+uvicorn main:app --reload
+```
