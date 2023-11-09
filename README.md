@@ -47,3 +47,10 @@ Pour lancer l'API
 ```
 uvicorn main:app --reload
 ```
+
+
+
+
+## CMC API
+
+https://coinmarketcap.com/api/documentation/v1/#section/Endpoint-Overview
