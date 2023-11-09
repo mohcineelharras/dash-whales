@@ -1,14 +1,17 @@
 import requests
 import time
 import pandas as pd
-import json
 import os
+from dotenv import load_dotenv
+load_dotenv()
+
+
 
 # Etherscan API URL
-url = "https://api.etherscan.io/api"
+url_etherscan = "https://api.etherscan.io/api"
 
 # Your Etherscan API Key
-api_key = "VVJFE7IG5WSK8P2UJIJN5MST5UBQEZYVYW"
+api_key_etherscan = "VVJFE7IG5WSK8P2UJIJN5MST5UBQEZYVYW"
 
 
 def get_coin_data(contractAddr, n):
@@ -17,9 +20,9 @@ def get_coin_data(contractAddr, n):
     params = {
         "module": "proxy",
         "action": "eth_blockNumber",
-        "apikey": api_key
+        "apikey": api_key_etherscan
     }
-    response = requests.get(url, params=params)
+    response = requests.get(url_etherscan, params=params)
     latest_block = int(response.json()["result"], 16)
 
     # Initialize an empty DataFrame to store the transactions
@@ -47,9 +50,9 @@ def get_coin_data(contractAddr, n):
             "startblock": start_block,
             "endblock": end_block,
             "sort": "asc",
-            "apikey": api_key
+            "apikey": api_key_etherscan
         }
-        response = requests.get(url, params=params)
+        response = requests.get(url_etherscan, params=params)
 
         # Get the transactions data
         transactions = response.json()["result"]
@@ -100,10 +103,10 @@ def update_and_save_csv(dict_addresses):
             params = {
                 "module": "proxy",
                 "action": "eth_blockNumber",
-                "apikey": api_key
+                "apikey": api_key_etherscan
             }
             # api call
-            response = requests.get(url, params=params)
+            response = requests.get(url_etherscan, params=params)
             # convert to int
             latest_block = int(response.json()["result"], 16)
             # determine number of loops
